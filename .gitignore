@@ -1,0 +1,21 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日志
+*.log
+
+# 分发产物（zip 由发布流程生成，不入库）
+dist/
+*.zip
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 临时文件
+*.tmp
+~$*
