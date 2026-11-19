@@ -4,6 +4,9 @@
 
 **中文** | [English](#english)
 
+[![Release](https://img.shields.io/github/v/release/Ray01207/dev-conventions?label=release)](https://github.com/Ray01207/dev-conventions/releases)
+[![License](https://img.shields.io/github/license/Ray01207/dev-conventions)](LICENSE)
+
 ---
 
 ## 这是什么
@@ -23,22 +26,24 @@
 
 ## 结构
 
-采用**渐进披露**：入口文件只保留 47 行，常驻上下文不占地方；细则按场景拆分，用到哪份读哪份。
+采用**渐进披露**：入口文件只保留 52 行，常驻上下文不占地方；细则按场景拆分，用到哪份读哪份。
 
 ```
 dev-conventions/
 ├── SKILL.md                      入口：触发条件 + 场景路由表 + 十条最高频硬约束
-└── references/
-    ├── component-and-ui.md       组件六原则 / 深色适配 / UI 设计规范十节
-    ├── build-and-env.md          构建验证 / 16KB 页对齐 / 工具链架构匹配 / 脚本自检
-    ├── code-and-runtime.md       外部 IO 容错 / Kotlin 协程 / 内存泄漏 / 列表性能
-    ├── release-and-security.md   签名 / 混淆发版 / 密钥管控 / Git 规范
-    └── workflow-and-docs.md      开发记录 / 架构图 / 崩溃日志 / Skill-MCP 管理
+├── references/
+│   ├── component-and-ui.md       组件六原则 / 深色适配 / UI 设计规范十节
+│   ├── build-and-env.md          构建验证 / 16KB 页对齐 / 工具链架构匹配 / 脚本自检
+│   ├── code-and-runtime.md       外部 IO 容错 / Kotlin 协程 / 内存泄漏 / 列表性能
+│   ├── release-and-security.md   签名 / 混淆发版 / 密钥管控 / Git 规范
+│   └── workflow-and-docs.md      开发记录 / 架构图 / 崩溃日志 / Skill-MCP 管理
+├── README.md
+└── LICENSE
 ```
 
 | 文件 | 行数 | 什么时候会读到 |
 |---|---|---|
-| `SKILL.md` | 47 | 总是（决定要不要触发、去哪找细则） |
+| `SKILL.md` | 52 | 总是（决定要不要触发、去哪找细则） |
 | `component-and-ui.md` | 117 | 改布局 / 样式 / 颜色 / 间距 / 主题 |
 | `build-and-env.md` | 68 | 跑构建 / 装工具链 / 打 .so / 改依赖 |
 | `code-and-runtime.md` | 40 | 写业务逻辑 / 协程 / 文件 IO / 列表 |
@@ -47,18 +52,46 @@ dev-conventions/
 
 ## 安装
 
+三种方式任选一种。共同点是：最后放进技能目录的必须是 `SKILL.md` 与 `references/` 的**同级结构**，外层多套一层目录会导致加载不到。
+
+### 方式一：下载 zip（不需要 git）
+
+从 [Releases](https://github.com/Ray01207/dev-conventions/releases/latest) 下载 `dev-conventions-vX.Y.Z.zip`，解压后把 `dev-conventions` 整个目录放进技能目录：
+
+```bash
+# 文件名以实际下载的版本为准，下面以 v1.0.1 为例
+
+# macOS / Linux
+unzip dev-conventions-v1.0.1.zip -d ~/.workbuddy/skills/
+
+# Windows PowerShell
+Expand-Archive dev-conventions-v1.0.1.zip -DestinationPath "$env:USERPROFILE\.workbuddy\skills"
+```
+
+### 方式二：git clone（便于后续 `git pull` 更新）
+
 **用户级**（所有项目都生效）：
 
 ```bash
-git clone https://github.com/Ray01207/dev-conventions.git
-cp -r dev-conventions ~/.workbuddy/skills/
+git clone https://github.com/Ray01207/dev-conventions.git ~/.workbuddy/skills/dev-conventions
+```
+
+以后更新只需：
+
+```bash
+git -C ~/.workbuddy/skills/dev-conventions pull
 ```
 
 **项目级**（只对当前仓库生效，可随代码提交给团队共享）：
 
 ```bash
-mkdir -p .workbuddy/skills
-cp -r dev-conventions .workbuddy/skills/
+git clone https://github.com/Ray01207/dev-conventions.git .workbuddy/skills/dev-conventions
+```
+
+### 方式三：手动复制（已有本地副本）
+
+```bash
+cp -r dev-conventions ~/.workbuddy/skills/
 ```
 
 其他遵循 `SKILL.md` 开放标准的工具（如 `~/.agents/skills/`）同理，把整个目录复制过去即可。装完**新开一个会话**才会被扫描到。
@@ -97,13 +130,12 @@ A cross-project development conventions pack, packaged as a `SKILL.md`-standard 
 
 **What it covers**: component and UI design specs, theming and dark mode, build verification and pre-build review, 16KB page alignment for native libraries, toolchain architecture matching, install-script self-checks, Kotlin coroutines, memory leaks, list performance, external IO fault tolerance, signing and obfuscated release, secret management, Git conventions, dev logs and architecture maps, crash log collection, and Skill/MCP management.
 
-**Design**: progressive disclosure — a 47-line entry file plus five topic-specific references loaded on demand, so the skill never floods the context window.
+**Design**: progressive disclosure — a 52-line entry file plus five topic-specific references loaded on demand, so the skill never floods the context window.
 
-**Install**:
+**Install**: download `dev-conventions-vX.Y.Z.zip` from [Releases](https://github.com/Ray01207/dev-conventions/releases/latest) and unpack the `dev-conventions` folder into your skills directory, or clone it directly:
 
 ```bash
-git clone https://github.com/Ray01207/dev-conventions.git
-cp -r dev-conventions ~/.workbuddy/skills/
+git clone https://github.com/Ray01207/dev-conventions.git ~/.workbuddy/skills/dev-conventions
 ```
 
 **Scope**: primarily Android; the IO fault-tolerance, script self-check, Git, and dev-log sections apply to general software projects. The toolchain-architecture and 16KB-page-alignment rules assume an arm64 (aarch64) host — adjust for x86_64.

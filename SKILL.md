@@ -1,6 +1,6 @@
 ---
 name: dev-conventions
-version: 1.0.0
+version: 1.0.1
 display_name: "Android通用开发&UI"
 display_name_en: "Dev Conventions & Guardrails"
 description: Android / 软件项目的通用开发约定与硬约束（详细版），覆盖组件与 UI 设计规范、主题与深色适配、构建验证与构建前排查、原生库 16KB 页对齐、工具链架构匹配、安装脚本自检、Kotlin 协程、内存泄漏、列表性能、外部 IO 容错、签名与混淆发版、敏感信息管控、Git 规范、开发记录与架构图、崩溃日志采集、Skill/MCP 管理。本技能应在以下场景使用：编写或修改 Android 项目代码、调整布局/样式/主题/颜色/间距、新增或改动组件、配置签名或混淆规则、打 release 包、安装 NDK/build-tools 等工具链、排查构建失败或运行闪退、以及任何 Android / 软件项目开工前需要对齐开发规范时。
